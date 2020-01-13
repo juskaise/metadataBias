@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inclusivity in Metadata</title>
+    <script src="scripts/v2newScript.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles/splitscreenstyle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+            $(document).ready(function(){
+            $("#hide").click(function toggler(divId) {
+                $("#alt").toggle();
+                })})
+    </script>
+</head>
+
+<body>
+
+<div class="split right">
+        <button onclick="collect()">
+                Click here to reset.</button>
+    <div class="centered">
+            <div class="grid-container">
+                    <div class="grid-empty"></div>
+                    <div class="grid-item" id="hide">
+                            <h2>Use for:</h2>
+                            <div>
+                            <p id="alt" class="hidden"></p> 
+                            </div> 
+                    </div>
+                    <div class="grid-empty"></div>  
+                    <div class="grid-item">
+                            <h2>Narrower:</h2>
+                            <p id="narrower" onclick="collect()">
+                            </p>
+                    </div>
+                    <div class="grid-empty">
+                            <h2>Preferred:</h2>
+                            <p id="preferred" onclick="collect()"></p>
+                    </div>
+                    <div class="grid-item">
+                            <h2>Broader:</h2>
+                            <p id="broader" onclick="collect()"></p>
+                    </div>  
+                    <div class="grid-empty"></div>
+                    <div class="grid-item">
+                            <h2>Related:</h2>
+                            <p id="related" onclick="collect()"></p>
+                    </div>
+                    <div class="grid-empty"></div> 
+                  </div>
+    </br>
+    </div>
+</div>
+
+<div class="split left">
+    <h1>Inclusivity in Metadata</h1>
+    <h3>Homosaurus terms (A and H)</h3>
+
+    <div>
+    <list>
+
+<ul onclick="collect()">Asexual people</ul>
+<ul onclick="collect()">Demisexual people</ul>
+<ul onclick="collect()">Fetishism</ul>
+<ul onclick="collect()">Gay men</ul>
+<ul onclick="collect()">Gay community</ul>
+<ul onclick="collect()">Gender dysphoria</ul>
+<ul onclick="collect()">Gender expression</ul>
+<ul onclick="collect()">Gender identity</ul>
+<ul onclick="collect()">Gender roles</ul>
+<ul onclick="collect()">Heteronormativity</ul>
+<ul onclick="collect()">Heterosexuality</ul>
+<ul onclick="collect()">Homosexuals</ul>
+<ul onclick="collect()">Lesbianism</ul>
+<ul onclick="collect()">Lesbians</ul>
+<ul onclick="collect()">Sexual minorities</ul>
+<ul onclick="collect()">Sexual orientation</ul>
+<ul onclick="collect()">Sexual preference</ul>
+<ul onclick="collect()">Sexuality</ul>
+<ul onclick="collect()">Transgender people</ul>
+<ul onclick="collect()">Transgenderism</ul>
+<ul onclick="collect()">Two-spirit people</ul>
+<ul onclick="collect()">Voyeurism</ul>
+    </list>
+    </div>
+</div>
+
+</body>
+</html>
