@@ -1014,6 +1014,106 @@ let homosaurus = {
     }
   ]
 },
+"Masochism": {
+  "@context": {
+    "dc": "http://purl.org/dc/terms/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@id": "http://homosaurus.org/v2/masochism",
+  "@type": "skos:Concept",
+  "dc:identifier": "masochism",
+  "dc:issued": {
+    "@value": "2019-05-14",
+    "@type": "xsd:date"
+  },
+  "dc:modified": {
+    "@value": "2019-05-14",
+    "@type": "xsd:date"
+  },
+  "skos:broader": [
+    {
+      "@id": "http://homosaurus.org/v2/sexualPreference",
+      "term": "Sexual preference"
+    },
+    {
+      "@id": "http://homosaurus.org/v2/BDSM"
+    },
+    {
+      "@id": "http://homosaurus.org/v2/fetishism",
+      "term": "Fetishism"
+    },
+    {
+      "@id": "http://homosaurus.org/v2/SM"
+    }
+  ],
+  "skos:hasTopConcept": [
+    {
+      "@id": "http://homosaurus.org/v2/sexualPreference"
+    },
+    {
+      "@id": "http://homosaurus.org/v2/sexAct"
+    },
+    {
+      "@id": "http://homosaurus.org/v2/sexualPractices"
+    }
+  ],
+  "skos:inScheme": {
+    "@id": "http://homosaurus.org/terms"
+  },
+  "skos:prefLabel": "Masochism",
+  "skos:exactMatch": "Masochism",
+  "skos:closeMatch": "Sadomasochism",
+  "skos:related": [
+    {
+      "@id": "http://homosaurus.org/v2/sexualIdentity"
+    },
+    {
+      "@id": "http://homosaurus.org/v2/BDSMCommunity"
+    },
+    {
+      "@id": "http://homosaurus.org/v2/bondage"
+    },
+    {
+      "@id": "http://homosaurus.org/v2/sexAct"
+    },
+    {
+      "@id": "http://homosaurus.org/v2/sexualPractices"
+    }
+  ]
+},
+"Non-binary people": {
+  "@context": {
+    "dc": "http://purl.org/dc/terms/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@id": "http://homosaurus.org/v2/nonBinaryPeople",
+  "@type": "skos:Concept",
+  "dc:identifier": "nonBinaryPeople",
+  "dc:issued": {
+    "@value": "2019-05-14",
+    "@type": "xsd:date"
+  },
+  "dc:modified": {
+    "@value": "2019-05-14",
+    "@type": "xsd:date"
+  },
+  "skos:altLabel": "Nonbinary people",
+  "skos:broader": {
+    "@id": "http://homosaurus.org/v2/transgenderPeople",
+    "term": "Transgender people"
+  },
+  "skos:hasTopConcept": {
+    "@id": "http://homosaurus.org/v2/LGBTQPeople"
+  },
+  "skos:inScheme": {
+    "@id": "http://homosaurus.org/terms"
+  },
+  "skos:prefLabel": "Non-binary people",
+  "skos:exactMatch": "Gender-noncomforming people",
+  "skos:closeMatch": "Gender noncomformity"
+},
 "Sexual orientation" : {
   "@context": {
     "dc": "http://purl.org/dc/terms/",
@@ -1877,9 +1977,9 @@ function collect(){
     var itemListRelated = [];
     var itemListBroader = [];
     var itemListNarrower = [];
-    var itemListAlt = [];
+    var itemListClose = [];
     var n = event.target.innerText
-    //collect "skos:prefLabel" terms
+    //collect "skos:prefLabel" term and "skos:exactMatch" terms
     if (homosaurus[n]){
       if (homosaurus[n]["skos:exactMatch"]){
         document.getElementById("alt").innerHTML = homosaurus[n]["skos:exactMatch"]
@@ -1889,6 +1989,10 @@ function collect(){
       else{
         document.getElementById("preferred").innerHTML = homosaurus[n]["skos:prefLabel"]
         document.getElementById("alt").innerHTML = ""
+      }
+      if (homosaurus[n]["skos:closeMatch"]){
+        var newC = homosaurus[n]["skos:closeMatch"].replace(/ /g,'+')
+        document.getElementById("close").innerHTML = "<a href=\"https://iucat.iu.edu/?utf8=&#10004;&search_field=subject&q=" + newC + '\">' + homosaurus[n]["skos:closeMatch"] + "</a>"
       }
     }
     else {
@@ -1991,6 +2095,34 @@ function collect(){
     document.getElementById("narrower").innerHTML = ''
     itemListNarrower.forEach((x)=>{
       document.getElementById("narrower").append(x)
+    })
+    //collect "skos:closeMatch" terms
+    if(homosaurus[n]){
+      if(homosaurus[n]["skos:closeMatch"].length > 1){
+        for (i = 0; i < homosaurus[n]["skos:closeMatch"].length; i ++){
+          var p = document.createElement('P')
+          homosaurus[n]["skos:closeMatch"][i]
+          p.innerHTML = homosaurus[n]["skos:closeMatch"][i]
+          p.addEventListener("onclick", collect)
+          itemListClose.push(p);
+        }
+      } else {var p = document.createElement('P')
+          if (homosaurus[n]["skos:closeMatch"]){
+            p.innerHTML = homosaurus[n]["skos:closeMatch"]
+            p.addEventListener("onclick", collect)
+            itemListClose.push(p);}
+          else {
+            p.innerHTML = homosaurus[n]["skos:closeMatch"]
+            p.addEventListener("onclick", collect)
+            itemListClose.push(p);}
+    }
+    } else {var p = document.createElement('P')
+        p.innerHTML = ""
+        itemListClose.push(p);
+      }
+    document.getElementById("close").innerHTML = ''
+    itemListClose.forEach((x)=>{
+      document.getElementById("close").append(x)
     })
     // !!!this has been consolidated into the "skos:preferred" function!!!
     //collect "skos:exactMatch" terms
