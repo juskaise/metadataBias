@@ -1994,6 +1994,7 @@ function collect(){
         var newC = homosaurus[n]["skos:closeMatch"].replace(/ /g,'+')
         document.getElementById("close").innerHTML = "<a href=\"https://iucat.iu.edu/?utf8=&#10004;&search_field=subject&q=" + newC + '\">' + homosaurus[n]["skos:closeMatch"] + "</a>"
       }
+      else (document.getElementById("close").innerHTML = "")
     }
     else {
       document.getElementById("preferred").innerHTML = ""
