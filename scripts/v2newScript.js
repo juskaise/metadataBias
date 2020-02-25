@@ -1995,7 +1995,7 @@ function collect(){
       document.getElementById("lcsh").innerHTML = ""
     }
     //collect "skos:related" terms
-    if(homosaurus[n]){
+    if(homosaurus[n]["skos:related"]){
       if(homosaurus[n]["skos:related"].length > 1){
         for (i = 0; i < homosaurus[n]["skos:related"].length; i ++){
           var p = document.createElement('P')
@@ -2019,17 +2019,21 @@ function collect(){
             p.innerHTML = homosaurus[n]["skos:related"]["@id"]
             p.addEventListener("onclick", collect)
             itemListRelated.push(p);}
-    }
+        }
+      document.getElementById("related").innerHTML = ''
+      itemListRelated.forEach((x)=>{
+        document.getElementById("related").append(x)})
     } else {var p = document.createElement('P')
         p.innerHTML = ""
-        itemListRelated.push(p);
+        while(itemListRelated.length){
+          itemListRelated.pop();
+        }
+        itemListRelated.getElementById("related").innerHTML = "";
       }
-    document.getElementById("related").innerHTML = ''
-    itemListRelated.forEach((x)=>{
-      document.getElementById("related").append(x)
-    })
+
+    
     //collect "skos:broader" terms
-    if(homosaurus[n]){
+    if(homosaurus[n]["skos:broader"]){
       if(homosaurus[n]["skos:broader"].length > 1){
         for (i = 0; i < homosaurus[n]["skos:broader"].length; i ++){
           var p = document.createElement('P')
@@ -2051,16 +2055,20 @@ function collect(){
             p.addEventListener("onclick", collect)
             itemListBroader.push(p);}
           } 
+          document.getElementById("broader").innerHTML = ''
+          itemListBroader.forEach((x)=>{
+            document.getElementById("broader").append(x)
+          })
     } else {var p = document.createElement('P')
         p.innerHTML = ""
-        itemListBroader.push(p);
+        while(itemListBroader.length){
+          itemListBroader.pop();
+        }
+        document.getElementById("broader").innerHTML = "";
       }
-    document.getElementById("broader").innerHTML = ''
-    itemListBroader.forEach((x)=>{
-      document.getElementById("broader").append(x)
-    })
+
     //collect "skos:narrower" terms
-    if(homosaurus[n]){
+    if(homosaurus[n]["skos:narrower"]){
       if(homosaurus[n]["skos:narrower"].length > 1){
         for (i = 0; i < homosaurus[n]["skos:narrower"].length; i ++){
           var p = document.createElement('P')
@@ -2084,15 +2092,17 @@ function collect(){
         p.addEventListener("onclick", collect)
         itemListNarrower.push(p);}
       } 
+      document.getElementById("narrower").innerHTML = ''
+      itemListNarrower.forEach((x)=>{
+        document.getElementById("narrower").append(x)
+      })
     } else {var p = document.createElement('P')
         p.innerHTML = ""
-        itemListNarrower.length = 0
-        itemListNarrower.push(p);
+        while(itemListNarrower.length){
+          itemListNarrower.pop();
+        }
+        document.getElementById("narrower").innerHTML = ""
       }
-    document.getElementById("narrower").innerHTML = ''
-    itemListNarrower.forEach((x)=>{
-      document.getElementById("narrower").append(x)
-    })
     //collect "skos:altLabel" terms
     //if(homosaurus[n]){
     //  if(homosaurus[n]["skos:altLabel"].length > 1){
