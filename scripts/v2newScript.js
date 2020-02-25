@@ -1983,7 +1983,7 @@ function collect(){
       if (homosaurus[n]["skos:exactMatch"]){
         var newN = homosaurus[n]["skos:exactMatch"].replace(/ /g,'+')
         document.getElementById("preferred").innerHTML = "<a href=\"https://iucat.iu.edu/?utf8=&#10004;&search_field=subject&q=" + newN + '\">' + homosaurus[n]["skos:prefLabel"] + "</a>"
-        document.getElementById("lcsh").innerHTML = "<a href=\"https://iucat.iu.edu/?utf8=&#10004;&search_field=subject&q=" + newN + '\">' + homosaurus[n]["skos:prefLabel"] + "</a>"
+        document.getElementById("lcsh").innerHTML = "<a href=\"https://iucat.iu.edu/?utf8=&#10004;&search_field=subject&q=" + newN + '\">' + homosaurus[n]["skos:exactMatch"] + "</a>"
       }
       else{
         document.getElementById("preferred").innerHTML = homosaurus[n]["skos:prefLabel"]
@@ -1992,6 +1992,7 @@ function collect(){
     }
     else {
       document.getElementById("preferred").innerHTML = ""
+      document.getElementById("lcsh").innerHTML = ""
     }
     //collect "skos:related" terms
     if(homosaurus[n]){
@@ -2141,6 +2142,9 @@ function collect(){
         document.getElementById("alt").innerHTML = ''
         itemListAlt.forEach((x)=>{
           document.getElementById("alt").append(x)})
+      }
+      else{
+        document.getElementById("alt").innerHTML = ""
       }
     
 }
