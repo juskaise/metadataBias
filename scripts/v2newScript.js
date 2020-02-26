@@ -1976,7 +1976,6 @@ function collect(){
     var itemListBroader = [];
     var itemListNarrower = [];
     var itemListAlt = [];
-    //var itemListUse = []
     var n = event.target.innerText
     //collect "skos:prefLabel" term and "skos:exactMatch" terms
     if (homosaurus[n]){
@@ -1993,6 +1992,22 @@ function collect(){
     else {
       document.getElementById("preferred").innerHTML = ""
       document.getElementById("lcsh").innerHTML = ""
+      while(itemListNarrower.length){
+        itemListNarrower.pop();
+      }
+      document.getElementById("narrower").innerHTML = ""
+      while(itemListBroader.length){
+        itemListBroader.pop();
+      }
+      document.getElementById("broader").innerHTML = ""
+      while(itemListRelated.length){
+        itemListRelated.pop();
+      }
+      document.getElementById("related").innerHTML = ""
+      while(itemListAlt.length){
+        itemListAlt.pop();
+      }
+      document.getElementById("alt").innerHTML = ""
     }
     //collect "skos:related" terms
     if(homosaurus[n]["skos:related"]){
@@ -2136,7 +2151,7 @@ function collect(){
       if(homosaurus[n]["skos:altLabel"]){
         homosaurus[n]["skos:altLabel"].forEach((x)=>{
           var p = document.createElement('P')
-          p.innerHTML = "<a href=\"https://iucat.iu.edu/?utf8=&#10004;&search_field=subject&q=" + x + '\">' + x + "</a>"
+          p.innerHTML = "<a href=\"https://iucat.iu.edu/?utf8=✓&search_field=all_field&q=" + x + '\">' + x + "</a>"
           itemListAlt.push(p)
         })
         itemListAlt.forEach((x)=>{
